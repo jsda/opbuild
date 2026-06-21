@@ -33,7 +33,7 @@ jobs:
       feeds_lines: ${{ steps.cfg.outputs.feeds_lines }}
       diy_build_dir: ${{ steps.cfg.outputs.diy_build_dir }}  # 自定义变量
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - id: cfg
         run: bash scripts/load-config.sh  # 自定义变量
 
@@ -126,7 +126,7 @@ jobs:
           echo -e "当前可用空间\n $(df -hT)" >> "$GITHUB_STEP_SUMMARY"  # 自定义变量
 
       - name: Checkout OpenWrt source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: ${{ needs.config.outputs.upstream_repo }}
           ref: ${{ env.MAIN_SHA }}
@@ -134,7 +134,7 @@ jobs:
           path: openwrt
 
       - name: Checkout builder repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           path: builder
 
@@ -296,7 +296,7 @@ jobs:
       CURRENT_TAG: ${{ needs.build.outputs.release_tag }}
       ARTIFACT_RETENTION_DAYS: ${{ needs.config.outputs.artifact_retention_days }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: |
           bash scripts/prune-releases.sh
           bash scripts/prune-workflows.sh  # 自定义变量
