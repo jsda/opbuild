@@ -1,0 +1,32 @@
+# 源码仓库 VIKINGYFY/immortalwrt main / qosmio/openwrt-ipq main-nss
+upstream:
+  repo: VIKINGYFY/immortalwrt
+  branch: main
+
+# NSS packages qosmio/nss-packages VIKINGYFY/nss-packages
+nss_packages:
+  repo: VIKINGYFY/nss-packages
+  branch: NSS-12.5-K6.x
+
+# 设备 ID。必须与 devices/<id>/ 目录下的一个子目录名称匹配，
+# 且该目录需要包含：
+#   - config        （OpenWrt 的 .config 文件）
+#   - files/        （可选的 overlay 根文件系统）
+device: jdcloud_re-ss-01
+
+# 自定义 feeds.conf
+feeds:
+  - name: qosmio
+    url: https://github.com/qosmio/packages-extra
+  - name: sqm_nss
+    url: https://github.com/JuliusBairaktaris/sqm-scripts-nss
+
+# Release 发布设置
+release:
+  prefix: jdcloud            # 标签格式 = <前缀>-<UTC 时间戳>-<运行 ID>
+  keep: 6                     # 保留最新的发布数量（更旧的会被删除）
+  artifact_retention_days: 7  # GitHub Actions 构建产物的保留天数（与 release 本身分开）
+
+# 自定义变量
+diy:
+  build_dir: /builder

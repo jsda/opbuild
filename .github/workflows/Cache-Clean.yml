@@ -1,0 +1,49 @@
+name: Cache-Clean
+
+on:
+  workflow_dispatch:
+    inputs:
+      cache_type:
+        description: "选择要删除的缓存类型"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - dl
+          - ccache
+          - tool
+
+permissions: write-all
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Projects
+        uses: actions/checkout@v4
+
+      - name: Delete Selected Cache
+        run: |
+          TYPE="${{ github.event.inputs.cache_type }}"
+          echo "Selected type: $TYPE"
+
+          if [ "$TYPE" = "all" ]; then
+            echo "Deleting all caches..."
+            gh cache delete --all
+            exit 0
+          fi
+
+          echo "Listing caches..."
+          gh cache list --limit 1000 --json id,key | jq -r '.[] | "\(.id) \(.key)"' > cache_list.txt
+
+          echo "Filtering caches with prefix: $TYPE"
+          while read -r id key; do
+            if [[ "$key" == "$TYPE"* ]]; then
+              echo "Deleting cache: $key ($id)"
+              gh cache delete "$id"
+            fi
+          done < cache_list.txt
