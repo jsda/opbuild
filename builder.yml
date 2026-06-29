@@ -5,7 +5,7 @@ upstream:
 
 # NSS packages qosmio/nss-packages VIKINGYFY/nss-packages
 nss_packages:
-  repo: VIKINGYFY/nss-packages
+  repo: qosmio/nss-packages
   branch: NSS-12.5-K6.x
 
 # 设备 ID。必须与 devices/<id>/ 目录下的一个子目录名称匹配，
