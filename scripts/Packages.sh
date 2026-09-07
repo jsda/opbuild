@@ -63,8 +63,14 @@ UPDATE_PACKAGE() {
 # 调用（包管理）
 # =========================
 
+#删除官方的默认插件
+rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*}
+rm -rf ../feeds/packages/net/{momo,dae*}
+
 UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
+
+UPDATE_PACKAGE "luci-app-daed" "QiuSimons/luci-app-daed" "kix"
 
 UPDATE_PACKAGE "luci-app-tailscale" "asvow/luci-app-tailscale" "main"
 
