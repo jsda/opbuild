@@ -67,7 +67,7 @@ UPDATE_PACKAGE() {
 #删除官方的默认插件
 rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*}
 rm -rf ../feeds/packages/net/{momo,dae*}
-UPDATE_PACKAGE "luci-app-daed" "QiuSimons/luci-app-daed" "kix"
+UPDATE_PACKAGE "daede" "kenzok8/openwrt-daede" "main"
 sudo apt-get install -y llvm npm
 npm install -g pnpm
 llvm-strip --version
