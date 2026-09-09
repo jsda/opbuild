@@ -246,7 +246,7 @@ CONFIG_PACKAGE_luci-app-homeproxy=y
 ## =========================
 ## dae
 ## =========================
-CONFIG_PACKAGE_luci-app-daed=y
+CONFIG_PACKAGE_luci-app-daede=y
 ## 核心 eBPF
 CONFIG_BPF=y
 CONFIG_BPF_SYSCALL=y
