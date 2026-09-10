@@ -68,9 +68,10 @@ UPDATE_PACKAGE() {
 rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*}
 rm -rf ../feeds/packages/net/{momo,dae*}
 UPDATE_PACKAGE "daede" "kenzok8/openwrt-daede" "main"
-sudo apt-get install -y llvm npm
+sudo apt-get install -y llvm npm # daed
 npm install -g pnpm
 llvm-strip --version
+sudo apt-get install -y dwarves # vmlinux-btf
 
 UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
