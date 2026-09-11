@@ -72,6 +72,11 @@ sudo apt-get install -y llvm npm # daed
 npm install -g pnpm
 llvm-strip --version
 sudo apt-get install -y dwarves # vmlinux-btf
+GEO_SITE=https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/release/geosite.dat
+GEO_IP=https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/release/geoip.dat
+mkdir -p ../files/usr/share/v2ray
+curl -sL -o ../files/usr/share/v2ray/geosite.dat $GEO_SITE
+curl -sL -o ../files/usr/share/v2ray/geoip.dat $GEO_IP
 
 UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
