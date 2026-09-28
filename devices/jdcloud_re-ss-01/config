@@ -98,7 +98,6 @@ CONFIG_PACKAGE_luci-mod-status=y
 CONFIG_LUCI_LANG_zh_Hans=y
 
 ## 功能插件
-CONFIG_PACKAGE_luci-app-base=y
 CONFIG_PACKAGE_luci-app-firewall=y
 CONFIG_PACKAGE_luci-app-uhttpd=y
 # CONFIG_PACKAGE_luci-app-sqm is not set                 # SQM QoS
@@ -128,7 +127,6 @@ CONFIG_PACKAGE_dnsmasq-full=y                 # 完整 DNS 功能
 CONFIG_PACKAGE_kmod-dsa=y                     # 新交换架构
 CONFIG_PACKAGE_kmod-bonding=y                 # 链路聚合
 CONFIG_PACKAGE_kmod-veth=y                    # 容器网络
-CONFIG_PACKAGE_kmod-wireguard=y               # WireGuard VPN
 
 # nftables（防火墙）
 CONFIG_PACKAGE_kmod-nft-core=y
@@ -191,6 +189,7 @@ CONFIG_PACKAGE_zoneinfo-asia=y               # 时区
 CONFIG_PACKAGE_ca-bundle=y                   # 证书
 CONFIG_PACKAGE_openssl-util=y
 CONFIG_PACKAGE_coreutils-stat=y              # 查看文件/目录的详细元数据
+CONFIG_PACKAGE_bind-dig=y                    # dns查询
 
 ## 磁盘工具
 CONFIG_PACKAGE_fdisk=y
@@ -247,7 +246,7 @@ CONFIG_PACKAGE_luci-app-homeproxy=y
 ## =========================
 ## dae
 ## =========================
-CONFIG_PACKAGE_luci-app-daede=y
+#CONFIG_PACKAGE_luci-app-daede=y
 ## 核心 eBPF
 CONFIG_BPF=y
 CONFIG_BPF_SYSCALL=y
