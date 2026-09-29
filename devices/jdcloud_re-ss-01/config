@@ -143,6 +143,7 @@ CONFIG_PACKAGE_kmod-nft-arp=y
 ## 高级/调试/代理
 CONFIG_PACKAGE_kmod-nft-queue=y
 CONFIG_PACKAGE_kmod-nft-dup-inet=y
+CONFIG_PACKAGE_kmod-sched-core=y
 CONFIG_PACKAGE_kmod-nft-xfrm=y
 
 
