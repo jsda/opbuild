@@ -31,11 +31,11 @@ jobs:
       release_keep: ${{ steps.cfg.outputs.release_keep }}
       artifact_retention_days: ${{ steps.cfg.outputs.artifact_retention_days }}
       feeds_lines: ${{ steps.cfg.outputs.feeds_lines }}
-      diy_build_dir: ${{ steps.cfg.outputs.diy_build_dir }}  # 自定义变量
+      diy_build_dir: ${{ steps.cfg.outputs.diy_build_dir }} # 自定义变量
     steps:
       - uses: actions/checkout@v7
       - id: cfg
-        run: bash scripts/load-config.sh  # 自定义变量
+        run: bash scripts/load-config.sh # 自定义变量
 
   check-updates:
     name: Check upstream
@@ -101,16 +101,16 @@ jobs:
       RELEASE_PREFIX: ${{ needs.config.outputs.release_prefix }}
       ARTIFACT_RETENTION_DAYS: ${{ needs.config.outputs.artifact_retention_days }}
       FEEDS_LINES: ${{ needs.config.outputs.feeds_lines }}
-      DIY_BUILD_DIR: ${{ needs.config.outputs.diy_build_dir }}  # 自定义变量
+      DIY_BUILD_DIR: ${{ needs.config.outputs.diy_build_dir }} # 自定义变量
     outputs:
       release_tag: ${{ steps.release.outputs.release_tag }}
     steps:
-      - name: Free disk space  # 自定义变量
+      - name: Free disk space # 自定义变量
         uses: jsda/actions@free-disk
         with:
           build-mount-path: ${{ env.DIY_BUILD_DIR }}
 
-      - name: Ensure build path  # 自定义变量
+      - name: Ensure build path # 自定义变量
         run: |
           sudo mkdir -p "${{ env.DIY_BUILD_DIR }}"
           sudo chown -R "$USER:$USER" "${{ env.DIY_BUILD_DIR }}"
@@ -138,24 +138,24 @@ jobs:
         with:
           path: builder
 
-      - name: Move source  # 自定义变量
+      - name: Move source # 自定义变量
         run: |
           sudo rsync -a openwrt/ "${{ env.DIY_BUILD_DIR }}/"
 
       # =========================
       # ✅ 缓存（优化核心）
       # =========================
-      - name: Cache dl  # 自定义变量
+      - name: Cache dl # 自定义变量
         uses: actions/cache@v6
         with:
           path: |
             ${{ env.DIY_BUILD_DIR }}/dl
-          key: dl-${{ runner.os }}-${{ env.RELEASE_PREFIX }}-${{ env.MAIN_SHA }}
+          key: dl-${{ runner.os }}-${{ env.MAIN_SHA }}
           restore-keys: |
-            dl-${{ runner.os }}-${{ env.RELEASE_PREFIX }}-
+            dl-${{ runner.os }}-
             dl-
 
-      - name: Cache toolchain  # 自定义变量
+      - name: Cache toolchain # 自定义变量
         id: cache_toolchain
         uses: actions/cache@v6
         with:
@@ -166,7 +166,7 @@ jobs:
           restore-keys: |
             toolchain-${{ env.RELEASE_PREFIX }}-
 
-      - name: Cache ccache  # 自定义变量
+      - name: Cache ccache # 自定义变量
         uses: actions/cache@v6
         with:
           path: |
@@ -175,7 +175,7 @@ jobs:
           restore-keys: |
             ccache-${{ env.RELEASE_PREFIX }}-
 
-      - name: Fix Toolchain Timestamp  # 自定义变量
+      - name: Fix Toolchain Timestamp # 自定义变量
         if: steps.cache_toolchain.outputs.cache-hit == 'true'
         run: |
           echo "Fixing toolchain stamps..."
@@ -193,15 +193,15 @@ jobs:
           ccache -s  >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Prepare build environment
-        working-directory: ${{ env.DIY_BUILD_DIR }}  # 自定义变量
+        working-directory: ${{ env.DIY_BUILD_DIR }} # 自定义变量
         env:
-          OPENWRT_DIR: ${{ env.DIY_BUILD_DIR }}  # 自定义变量
+          OPENWRT_DIR: ${{ env.DIY_BUILD_DIR }} # 自定义变量
           BUILDER_REPO: ${{ github.workspace }}/builder
         run: |
           bash ${{ github.workspace }}/builder/scripts/prepare-build.sh  # 自定义变量
 
       - name: Set reproducible-build env
-        working-directory: ${{ env.DIY_BUILD_DIR }}  # 自定义变量
+        working-directory: ${{ env.DIY_BUILD_DIR }} # 自定义变量
         run: |
           set -euo pipefail
           {
@@ -213,7 +213,7 @@ jobs:
           } >>"$GITHUB_ENV"
 
       - name: Download sources
-        working-directory: ${{ env.DIY_BUILD_DIR }}  # 自定义变量
+        working-directory: ${{ env.DIY_BUILD_DIR }} # 自定义变量
         run: |
           set -euo pipefail
           for attempt in 1 2 3; do
@@ -223,7 +223,7 @@ jobs:
           done
 
       - name: Build
-        working-directory: ${{ env.DIY_BUILD_DIR }}  # 自定义变量
+        working-directory: ${{ env.DIY_BUILD_DIR }} # 自定义变量
         run: |
           set -euo pipefail
           if ! make -j"$(nproc)"; then
@@ -246,7 +246,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ${{ needs.config.outputs.device }}-images
-          path: ${{ env.DIY_BUILD_DIR }}/upload  # 自定义变量
+          path: ${{ env.DIY_BUILD_DIR }}/upload # 自定义变量
           if-no-files-found: error
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
 
