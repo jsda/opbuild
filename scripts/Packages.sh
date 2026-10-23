@@ -63,14 +63,12 @@ UPDATE_PACKAGE() {
 # 调用（包管理）
 # =========================
 
-# daed
+# dae/honk
 # 删除官方的默认插件
-# rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*}
-# rm -rf ../feeds/packages/net/{momo,dae*}
-# UPDATE_PACKAGE "daede" "kenzok8/openwrt-daede" "main"
-# sudo apt-get install -y llvm npm # daed
-# npm install -g pnpm
-# sudo apt-get install -y dwarves # vmlinux-btf
+rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*,honk*}
+rm -rf ../feeds/packages/net/{momo,dae*,honk*}
+UPDATE_PACKAGE "honk" "QiuSimons/luci-app-honk" "master"
+UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
 # GEO_SITE=https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/release/geosite.dat
 # GEO_IP=https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/release/geoip.dat
 # mkdir -p ../files/usr/share/v2ray
