@@ -51,6 +51,9 @@ while IFS= read -r line; do
   echo "$line" >>feeds.conf
 done <<<"$FEEDS_LINES"
 
+# 自定义变量
+sed -i 's/immortalwrt/openwrt/' feeds.conf
+
 # Update + install each custom feed individually so failures are obvious,
 # then update + install everything else.
 while IFS= read -r line; do
@@ -70,7 +73,6 @@ chmod +x "$GITHUB_WORKSPACE/builder/scripts/"*.sh
 cd package
 bash "$GITHUB_WORKSPACE/builder/scripts/Packages.sh"
 cd ..
-sed -i 's/immortalwrt/openwrt/' feeds.conf
 
 # 3. Drop in device .config and resolve.
 log::info "Loading device config: $DEVICE_DIR/config"
