@@ -67,14 +67,8 @@ UPDATE_PACKAGE() {
 # 删除官方的默认插件
 rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*,honk*}
 rm -rf ../feeds/packages/net/{momo,dae*,honk*}
-UPDATE_PACKAGE "honk" "QiuSimons/luci-app-honk" "master"
-UPDATE_PACKAGE "vmlinux-btf" "QiuSimons/vmlinux-btf" "master"
+UPDATE_PACKAGE "honk" "daeuniverse/openwrt-packages" "master"
 sudo apt-get install -y dwarves # vmlinux-btf
-# GEO_SITE=https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/release/geosite.dat
-# GEO_IP=https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/release/geoip.dat
-# mkdir -p ../files/usr/share/v2ray
-# curl -sL -o ../files/usr/share/v2ray/geosite.dat $GEO_SITE
-# curl -sL -o ../files/usr/share/v2ray/geoip.dat $GEO_IP
 
 UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
