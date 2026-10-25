@@ -67,7 +67,7 @@ UPDATE_PACKAGE() {
 # 删除官方的默认插件
 rm -rf ../feeds/luci/applications/luci-app-{passwall*,dae*,honk*}
 rm -rf ../feeds/packages/net/{momo,dae*,honk*}
-UPDATE_PACKAGE "honk" "daeuniverse/openwrt-packages" "main"
+UPDATE_PACKAGE "daeuniverse" "daeuniverse/openwrt-packages" "main"
 sudo apt-get install -y dwarves # vmlinux-btf
 
 UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"

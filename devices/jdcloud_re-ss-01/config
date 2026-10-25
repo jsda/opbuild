@@ -235,13 +235,13 @@ CONFIG_PACKAGE_luci-proto-wireguard=y
 ## =========================
 ## dae/honk
 ## =========================
-CONFIG_PACKAGE_honk=y
+# CONFIG_PACKAGE_honk=y
+CONFIG_PACKAGE_luci-app-honk=y
 
 # CONFIG_DEBUG_INFO_BTF=y
 # CONFIG_FUNCTION_TRACER=y
 # CONFIG_DYNAMIC_FTRACE=y
 CONFIG_PACKAGE_vmlinux-btf=y # 以上3个内核参数与此包二选一
-
 
 ## =========================
 ## 系统参数
